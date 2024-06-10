@@ -1,12 +1,10 @@
 import express from 'express'
-import { getOrders, getProductByMail, insertOrders } from './order.controller'
+import { getOrders, insertOrders } from './order.controller'
 
 const orderRouter = express.Router()
 
-orderRouter.put('/orders', insertOrders)
+orderRouter.post('/', insertOrders)
 
-orderRouter.get('/orders', getOrders)
-
-orderRouter.get('/orders', getProductByMail)
+orderRouter.get('/', getOrders)
 
 export default orderRouter

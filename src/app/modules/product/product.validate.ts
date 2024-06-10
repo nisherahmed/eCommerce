@@ -14,7 +14,7 @@ export const ProductJoiValidation = Joi.object({
   name: Joi.string().required(),
   description: Joi.string().required(),
   price: Joi.number().required(),
-  category: Joi.string().email().required(),
+  category: Joi.string().required(),
   tags: Joi.array().default([]),
   variants: Joi.array().items(VariantJoi).default([]),
   inventory: InventoryJoi,

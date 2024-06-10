@@ -1,13 +1,13 @@
-# Batch-3-Assignment-2
+# Mongoose Express CRUD Mastery
 
-Objective: Develop a Express application with TypeScript as the programming language, integrating MongoDB with Mongoose for effective data management. Ensure data integrity through validation using Joi/Zod.
+Developed a Node.js Express application with TypeScript as the programming language, integrating MongoDB with Mongoose for user data and order management. Ensure data integrity through validation using Joi/Zod.
 
 ## Installation
 
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/nisherahmed/eCommerce
+   git clone https://github.com/HayatEmraan/mongoose-express-mastery
 
    ```
 
@@ -41,33 +41,33 @@ Objective: Develop a Express application with TypeScript as the programming lang
 
 ## API Reference
 
-#### 1. Create a New Product
+#### 1. Create a new user
 
 ```http
-  POST /api/products
+  POST /api/users
 ```
 - Request Body:
 
 ```json
 {
-    "name": "iPhone 13",
-    "description": "A sleek and powerful smartphone with cutting-edge features.",
-    "price": 999,
-    "category": "Electronics",
-    "tags": ["smartphone", "Apple", "iOS"],
-    "variants": [
-        {
-            "type": "Color",
-            "value": "Midnight Blue"
-        },
-        {
-            "type": "Storage Capacity",
-            "value": "256GB"
-        }
+    "userId": "number",
+    "username": "string",
+    "password": "string",
+    "fullName": {
+        "firstName": "string",
+        "lastName": "string"
+    },
+    "age": "number",
+    "email": "string",
+    "isActive": "boolean",
+    "hobbies": [
+        "string",
+        "string"
     ],
-    "inventory": {
-        "quantity": 50,
-        "inStock": true
+    "address": {
+        "street": "string",
+        "city": "string",
+        "country": "string"
     }
 }
 ```
@@ -76,151 +76,121 @@ Objective: Develop a Express application with TypeScript as the programming lang
 ```json
 {
     "success": true,
-    "message": "Product created successfully!",
+    "message": "User created successfully!",
     "data": {
-        "name": "iPhone 13",
-        "description": "A sleek and powerful smartphone with cutting-edge features.",
-        "price": 999,
-        "category": "Electronics",
-        "tags": ["smartphone", "Apple", "iOS"],
-        "variants": [
-            {
-                "type": "Color",
-                "value": "Midnight Blue"
-            },
-            {
-                "type": "Storage Capacity",
-                "value": "256GB"
-            }
+        "userId": "number",
+        "username": "string",
+        "fullName": {
+            "firstName": "string",
+            "lastName": "string"
+        },
+        "age": "number",
+        "email": "string",
+        "isActive": "boolean",
+        "hobbies": [
+            "string",
+            "string"
         ],
-        "inventory": {
-            "quantity": 50,
-            "inStock": true
+        "address": {
+            "street": "string",
+            "city": "string",
+            "country": "string"
         }
     }
 }
 ```
 
-#### 2. Retrieve a List of All Products
+#### 2. Retrieve a list of all users
 
 ```http
-  GET /api/products
+  GET /api/users
 ```
 - Response
 
 ```json
 {
     "success": true,
-    "message": "Products fetched successfully!",
+    "message": "Users fetched successfully!",
     "data": [
         {
-            "name": "iPhone 13",
-            "description": "A sleek and powerful smartphone with cutting-edge features.",
-            "price": 999,
-            "category": "Electronics",
-            "tags": ["smartphone", "Apple", "iOS"],
-            "variants": [
-                {
-                    "type": "Color",
-                    "value": "Midnight Blue"
-                },
-                {
-                    "type": "Storage Capacity",
-                    "value": "256GB"
-                }
-            ],
-            "inventory": {
-                "quantity": 50,
-                "inStock": true
+            "username": "string",
+            "fullName": {
+                "firstName": "string",
+                "lastName": "string"
+            },
+            "age": "number",
+            "email": "string",
+            "address": {
+                "street": "string",
+                "city": "string",
+                "country": "string"
             }
         },
-        {
-            "name": "Samsung Galaxy S21",
-            "description": "High-performance Android smartphone with advanced camera capabilities.",
-            "price": 799,
-            "category": "Electronics",
-            "tags": ["smartphone", "Samsung", "Android"],
-            "variants": [
-                {
-                    "type": "Color",
-                    "value": "Phantom Black"
-                },
-                {
-                    "type": "Storage Capacity",
-                    "value": "128GB"
-                }
-            ],
-            "inventory": {
-                "quantity": 30,
-                "inStock": true
-            }
-        }
-        // Additional products can be added here...
+        // more objects...
     ]
 }
 ```
 
-#### 3. Retrieve a Specific Product by ID
+#### 3. Retrieve a specific user by ID
 
 ```http
-  GET /api/products/:productId
+  GET /api/users/:userId
 ```
 - Response
 
 ```json
 {
     "success": true,
-    "message": "Product fetched successfully!",
+    "message": "User fetched successfully!",
     "data": {
-        "name": "iPhone 13",
-        "description": "A sleek and powerful smartphone with cutting-edge features.",
-        "price": 999,
-        "category": "Electronics",
-        "tags": ["smartphone", "Apple", "iOS"],
-        "variants": [
-            {
-                "type": "Color",
-                "value": "Midnight Blue"
-            },
-            {
-                "type": "Storage Capacity",
-                "value": "256GB"
-            }
+        "userId": "number",
+        "username": "string",
+        "fullName": {
+            "firstName": "string",
+            "lastName": "string"
+        },
+        "age": "number",
+        "email": "string",
+        "isActive": "boolean",
+        "hobbies": [
+            "string",
+            "string"
         ],
-        "inventory": {
-            "quantity": 50,
-            "inStock": true
+        "address": {
+            "street": "string",
+            "city": "string",
+            "country": "string"
         }
     }
 }
 ```
 
-#### 4. Update Product Information
+#### 4. Update user information
 
 ```http
-  PUT /api/products/:productId
+  PUT /api/users/:userId
 ```
 - Request Body:
 ```json
 {
-    "name": "iPhone 13",
-    "description": "A sleek and powerful smartphone with cutting-edge features.",
-    "price": 999,
-    "category": "Electronics",
-    "tags": ["smartphone", "Apple", "iOS"],
-    "variants": [
-        {
-            "type": "Color",
-            "value": "Midnight Blue"
-        },
-        {
-            "type": "Storage Capacity",
-            "value": "256GB"
-        }
+    "userId": "number",
+    "username": "string",
+    "password": "string",
+    "fullName": {
+        "firstName": "string",
+        "lastName": "string"
+    },
+    "age": "number",
+    "email": "string",
+    "isActive": "boolean",
+    "hobbies": [
+        "string",
+        "string"
     ],
-    "inventory": {
-        "quantity": 50,
-        "inStock": true
+    "address": {
+        "street": "string",
+        "city": "string",
+        "country": "string"
     }
 }
 ```
@@ -229,44 +199,107 @@ Objective: Develop a Express application with TypeScript as the programming lang
 ```json
 {
     "success": true,
-    "message": "Product updated successfully!",
+    "message": "User updated successfully!",
     "data": {
-        "name": "iPhone 13",
-        "description": "A sleek and powerful smartphone with cutting-edge features.",
-        "price": 999,
-        "category": "Electronics",
-        "tags": ["smartphone", "Apple", "iOS"],
-        "variants": [
-            {
-                "type": "Color",
-                "value": "Midnight Blue"
-            },
-            {
-                "type": "Storage Capacity",
-                "value": "256GB"
-            }
+        "userId": "number",
+        "username": "string",
+        "fullName": {
+            "firstName": "string",
+            "lastName": "string"
+        },
+        "age": "number",
+        "email": "string",
+        "isActive": "boolean",
+        "hobbies": [
+            "string",
+            "string"
         ],
-        "inventory": {
-            "quantity": 49,
-            "inStock": true
+        "address": {
+            "street": "string",
+            "city": "string",
+            "country": "string"
         }
     }
 }
 ```
 
-#### 5. Delete a Product
+#### 5. Delete a user
 
 ```http
-  PUT /api/products/:productId
+  DELETE /api/users/:userId
+```
+- Response
+```json
+{
+    "success": true,
+    "message": "User deleted successfully!",
+    "data" : null
+}
+```
+
+#### 6. Order Management
+6.1 Add New Product in Order:
+
+```http
+  PUT /api/users/:userId/orders
+```
+- Request Body:
+
+```json
+{
+    "productName": "string",
+    "price": "number",
+    "quantity": "number"
+}
+```
 
 - Response: 
 
 ```json
 {
     "success": true,
-    "message": "Product deleted successfully!",
+    "message": "Order created successfully!",
     "data": null
- }
- 
-// The product should be deleted from the database.
+}
+```
+
+6.2 Retrieve all orders for a specific user:
+```http
+  GET /api/users/:userId/orders
+```
+- Response:
+```json
+{
+    "success": true,
+    "message": "Order fetched successfully!",
+    "data": {
+        "orders": [
+            {
+                "productName": "Product 1",
+                "price": 23.56,
+                "quantity": 2
+            },
+            {
+                "productName": "Product 2",
+                "price": 23.56,
+                "quantity": 5
+            }
+        ]
+    }
+}
+```
+
+6.3 Calculate Total Price of Orders for a Specific User:
+```http
+  GET /api/users/:userId/orders/total-price
+```
+- Response:
+```json
+{
+    "success": true,
+    "message": "Total price calculated successfully!",
+    "data": {
+        "totalPrice": 454.32
+    }
+}
 ```

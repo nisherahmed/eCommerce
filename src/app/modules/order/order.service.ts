@@ -11,11 +11,11 @@ export const orderInsert = async (order: IOrder) => {
 
   const stock = await ProductModel.findOne({
     _id: order.productId,
-    quantity: 0,
+    'inventory.quantity': 0,
     inStock: false,
   })
 
-  if (!stock) {
+  if (stock) {
     throw new Error('Insufficient quantity available in inventory')
   }
 
@@ -25,24 +25,26 @@ export const orderInsert = async (order: IOrder) => {
     await ProductModel.updateOne(
       {
         _id: order.productId,
-        quantity: {
+        'inventory.quantity': {
           $gte: 1,
         },
       },
-      { $inc: { quantity: -1 } },
+      { $inc: { 'inventory.quantity': -1 } },
     )
     await ProductModel.updateOne(
-      { _id: order.productId, quantity: 0 },
-      { $inc: { quantity: -1 }, inStock: false },
+      { _id: order.productId, 'inventory.quantity': 0 },
+      { $inc: { 'inventory.quantity': -1 }, inStock: false },
     )
   }
   return result
 }
 
-export const fetchingOrders = async () => {
-  return await OrderModel.find({})
-}
-
-export const productByMail = async (email: string) => {
-  return await OrderModel.find({ email })
+export const fetchingOrders = async (mail: string) => {
+  let strMail = {}
+  if (mail) {
+    strMail = {
+      email: mail,
+    }
+  }
+  return await OrderModel.find(strMail)
 }

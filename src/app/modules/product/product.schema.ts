@@ -1,6 +1,23 @@
 import { Schema } from 'mongoose'
 import { ProductInterface } from './product.interface'
 
+const InventorySchema = new Schema(
+  {
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    inStock: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    versionKey: false,
+    _id: false,
+  },
+)
+
 export const ProductSchema = new Schema<ProductInterface>(
   {
     name: {
@@ -22,12 +39,13 @@ export const ProductSchema = new Schema<ProductInterface>(
     },
     tags: {
       type: [String],
-      default: [],
+      required: [true, 'Tags is required'],
     },
     variants: {
       type: [Object],
-      default: [],
+      required: [true, 'Variant is required'],
     },
+    inventory: InventorySchema,
   },
   {
     versionKey: false,
