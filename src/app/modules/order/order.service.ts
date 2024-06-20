@@ -6,7 +6,7 @@ export const orderInsert = async (order: IOrder) => {
   const isFound = await ProductModel.findById(order.productId)
 
   if (!isFound) {
-    throw new Error('Order not found')
+    throw new Error('Product not found')
   }
 
   const stock = await ProductModel.findOne({

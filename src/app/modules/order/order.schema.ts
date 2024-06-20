@@ -5,7 +5,6 @@ export const OrderSchema = new Schema<IOrder>(
   {
     email: {
       type: String,
-      unique: true,
       required: [true, 'Email is required'],
     },
     productId: {
